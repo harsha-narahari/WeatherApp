@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .row::after {
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+</style>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+<div ng-app="weatherApp" ng-controller="weatherController">
+    <div class="row jumbotron">
+        <div class="col-lg-1 col-md-1">&nbsp;</div>
+        <div class="col-lg-10 col-md-10"><h2>Weather App</h2></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-1 col-md-1">Country</div>
+        <div class="col-lg-6 col-md-6">
+            <select name='country' id="country" class="form-control" ng-model="country" ng-options="country for country in countries" required>
+                <option value="" disabled>Select</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-1 col-md-1">City</div>
+        <div class="col-lg-6 col-md-6">
+            <select ng-model="city" class="form-control" ng-options="city.name for city in cities"></select>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-lg-1 col-md-1">&nbsp;</div>
+        <div class="col-lg-3 col-md-3">
+            <h3>Current Weather</h3>
+        </div>
+        <div class="col-lg-3 col-md-3">
+            <h5>updated on {{datetime}}</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            Temperature
+        </div>
+        <div class="col-lg-6 col-md-6">
+            {{temperature}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            Pressure
+        </div>
+        <div class="col-lg-6 col-md-6">
+            {{pressure}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            Humidity
+        </div>
+        <div class="col-lg-6 col-md-6">
+            {{humidity}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            Min Temperature
+        </div>
+        <div class="col-lg-6 col-md-6">
+            {{minTemperature}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            Max Temperature
+        </div>
+        <div class="col-lg-6 col-md-6">
+            {{maxTemperature}}
+        </div>
+    </div>       
+</div>
+<!-- Angular Material requires Angular.js Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+<script src="~/Scripts/weatherApp.js"></script>
+
