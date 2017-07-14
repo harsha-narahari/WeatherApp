@@ -162,11 +162,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\WeatherData.cs" />
+    <Compile Include="Weather\Apixu\ApixuWeatherData.cs" />
+    <Compile Include="Weather\Apixu\ApixuWeatherHelper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Weather\WeatherHelper.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Start\WeatherHelper.cs" />
+    <Compile Include="Weather\OpenWeather\OpenWeatherData.cs" />
+    <Compile Include="Weather\OpenWeather\OpenWeatherHelper.cs" />
     <Compile Include="Controllers\WeatherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -175,6 +180,8 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Weather\WeatherApiName.cs" />
+    <Compile Include="Weather\WeatherHelperFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

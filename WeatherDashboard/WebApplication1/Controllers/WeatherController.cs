@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using WebApplication1.App_Start;
 using WebApplication1.Models;
+using WebApplication1.Weather;
 
 namespace WebApplication1.Controllers
 {
     public class WeatherController : Controller
     {
         const string CITY_LIST_RELATIVE_PATH = "../App_Data/cityList.json";
-        
+        WeatherHelper oWeatherHelper = WeatherHelperFactory.GetWeatherHelper(WeatherApiName.OpenWeather);
         // GET: Weather
         public ActionResult Index()
         {            
@@ -20,8 +20,7 @@ namespace WebApplication1.Controllers
         public ActionResult GetAllCountries()
         {
             List<string> Countries = new List<string>();
-            WeatherHelper helper = new App_Start.WeatherHelper();
-            Countries = helper.GetCities(Server.MapPath(CITY_LIST_RELATIVE_PATH))
+            Countries = oWeatherHelper.GetCities(Server.MapPath(CITY_LIST_RELATIVE_PATH))
                                     .Where(c=>!string.IsNullOrEmpty(c.country))
                                     .Select(c => c.country)
                                     .Distinct()
@@ -32,21 +31,17 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult GetCities(string Country)
         {
-            WeatherHelper helper = new App_Start.WeatherHelper();
-            List<City> SpecificCities = helper.GetCities(Server.MapPath(CITY_LIST_RELATIVE_PATH))
+            List<City> SpecificCities = oWeatherHelper.GetCities(Server.MapPath(CITY_LIST_RELATIVE_PATH))
                                                     .Where(c => c.country == Country)
                                                     .Distinct()
                                                     .OrderBy(c => c.name).ToList<City>();            
             return Json(SpecificCities, JsonRequestBehavior.AllowGet);
         }
 
-
         [HttpGet]
         public ActionResult GetWeather(int CityID)
         {            
-            WeatherHelper helper = new App_Start.WeatherHelper();
-            string WeatherInformation = helper.GetWeatherInformation(CityID);
-            return Json(WeatherInformation, JsonRequestBehavior.AllowGet);
+            return Json(oWeatherHelper.GetWeatherInformation(Server.MapPath(CITY_LIST_RELATIVE_PATH), CityID), JsonRequestBehavior.AllowGet);
         }
     }
 }
