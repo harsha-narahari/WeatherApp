@@ -3,6 +3,9 @@
 weatherApp.controller("weatherController", function ($scope, $http, $sce) {
     $scope.cities = [];
 
+    $scope.APIs = ["OpenWeather", "Apixu"]
+    $scope.API = "OpenWeather";
+
     var getCountries = function () {
 
         var url = "Weather/GetAllCountries";
@@ -38,16 +41,25 @@ weatherApp.controller("weatherController", function ($scope, $http, $sce) {
     });
 
     $scope.$watch('city', function () {
+        getWeather();
+    });
+
+    $scope.$watch('API', function () {
+        getWeather();
+    });
+
+    var getWeather = function () {
         $scope.datetime = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
-        if ($scope.city) {
-            var url = "Weather/GetWeather?CityID=" + $scope.city.id;
+        if ($scope.city && $scope.API) {
+            var url = "Weather/GetWeather?CityID=" + $scope.city.id + "&API=" + $scope.API;
             $http.get(url)
-                .then(function (result) {                    
-                    if (result.data) {                        
+                .then(function (result) {
+                    if (result.data) {
                         //var data = JSON.parse(result.data);
                         //setOpenWeatherData(data);
                         //setApixuData(data);
-                        //setApiData(result.data);                        
+                        //setApiData(result.data);            
+                        $scope.genericProperties = [];
                         setGenericProperties(JSON.parse(result.data));
                         debugger;
                     }
@@ -58,7 +70,7 @@ weatherApp.controller("weatherController", function ($scope, $http, $sce) {
                 }
             );
         }
-    });
+    };
 
     $scope.datetime = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
     $scope.genericProperties = [];

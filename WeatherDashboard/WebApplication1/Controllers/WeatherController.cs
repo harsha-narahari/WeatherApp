@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using WebApplication1.Models;
@@ -39,8 +40,10 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetWeather(int CityID)
-        {            
+        public ActionResult GetWeather(int CityID, string API)
+        {
+            WeatherApiName oWeatherApiName = (WeatherApiName)Enum.Parse(typeof(WeatherApiName), API);
+            oWeatherHelper = WeatherHelperFactory.GetWeatherHelper(oWeatherApiName);
             return Json(oWeatherHelper.GetWeatherInformation(Server.MapPath(CITY_LIST_RELATIVE_PATH), CityID), JsonRequestBehavior.AllowGet);
         }
     }

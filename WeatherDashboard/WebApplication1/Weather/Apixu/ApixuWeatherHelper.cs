@@ -30,15 +30,15 @@ namespace WebApplication1.Weather
                     int i = 0;
                     throw;
                 }
-                dynamic odata = JsonConvert.DeserializeObject(WeatherInfo);
-                oWeatherData = new WeatherData()
-                {
-                    Temperature = odata.current.temp_c,
-                    Pressure = odata.current.pressure_in,
-                    Humidity = odata.current.humidity,
-                    Wind = odata.current.wind_kph,
-                    UpdatedOn = DateTime.Now.ToString("dd/mmm/yyyy HH:mm:ss")                    
-                };
+                //dynamic odata = JsonConvert.DeserializeObject(WeatherInfo);
+                //oWeatherData = new WeatherData()
+                //{
+                //    Temperature = odata.current.temp_c,
+                //    Pressure = odata.current.pressure_in,
+                //    Humidity = odata.current.humidity,
+                //    Wind = odata.current.wind_kph,
+                //    UpdatedOn = DateTime.Now.ToString("dd/mmm/yyyy HH:mm:ss")                    
+                //};
 
             }
             return WeatherInfo;
